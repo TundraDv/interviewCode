@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <style>
+      .padre {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        margin: auto; /* Center the container */
+      }
+      .tooltip {
+          position: relative;
+          display: inline-block;
+      }
+  
+      .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 120px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          bottom: 125%;
+          left: 50%;
+          margin-left: -60px;
+          opacity: 0;
+          transition: opacity 0.3s;
+      }
+  
+      .tooltip:hover .tooltiptext {
+          visibility: visible;
+          opacity: 1;
+      }
+      .circle, .circleNoSelected {
+        width: 100px; /* Adjust the width and height to change the size of the circle */
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%; /* Makes the element a circle */
+      }
+      .circle {
+        background-color: blueviolet; /* Change the color as desired */
+      }
+      .circleNoSelected {
+        background-color: white; /* Change the color as desired */
+        border-style: solid;
+        border-color: gray;
+      }
+      .circle .circle-text, .circleNoSelected .circle-text {
+        text-align: center;
+        color: inherit; /* Inherit color from parent */
+      }
+      .line-between {
+        height: 2px; /* Adjust thickness of the line */
+        background-color: gray; /* Adjust color of the line */
+        flex-grow: 1; /* Expand to fill remaining space */
+      }
+      .hijo {
+         margin: 10px;
+         width: auto;
+      }
+      .hijo.activo {
+         margin: 5px;
+         color: white;
+      }
+  </style>
+</head>
+<body>
+<div class="padre">
+   <div class="hijo"> 
+      <div class="circleNoSelected">
+         <div class="circle-text tooltip">
+            Productos a devolver
+            <span class="tooltiptext">
+               Descripción del evento 1
+            </span>
+         </div>
+      </div>
+   </div>
+
+   <div class="line-between"></div>
+
+   <div class="hijo activo">
+      <div class="circle">
+         <div class="circle-text tooltip">
+            Nuevos productos
+            <span class="tooltiptext">
+               Descripción del evento 2
+            </span>
+         </div>
+      </div>
+   </div>
+
+   <div class="line-between"></div>
+
+   <div class="hijo"> 
+      <div class="circleNoSelected">
+         <div class="circle-text tooltip">
+            Etiqueta de devolución
+            <span class="tooltiptext">
+               Descripción del evento 3
+            </span>
+         </div>
+      </div>
+   </div>
+</div>
+</body>
+</html>

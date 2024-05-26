@@ -1,27 +1,20 @@
-
-// views/Albums.js
 import React, { useState, useEffect } from 'react';
-import SongsModalComponent from '../components/modal'
-import {Container, Card, CardActions, CardHeader, Typography, CardMedia, CardContent, Button, Box, Grid} from '@mui/material';
+import SongsModalComponent from '../components/modal';
+import { Container, Grid, Typography, Button } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import AlbumGrid from '../components/albumsGrid';
+import SongsGrid from '../components/songsGrid';
 import axios from 'axios';
 
 const AlbumsView = () => {
   const apiUrl = "https://my-json-server.typicode.com/tundraElie/fakeDB/data";
   const [albums, setAlbums] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [selectedAlbum, setSelectedAlbum] = useState(null); 
-
-  const handleOpen = (album) => {
-    setSelectedAlbum(album);
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const fetchAlbums = async () => {
       try {
         const response = await axios.get(apiUrl);
-        // console.log(response);
+        console.log(response.data)
         setAlbums(response.data);
       } catch (error) {
         console.error('Error fetching albums:', error);
@@ -36,29 +29,18 @@ const AlbumsView = () => {
       <Typography align="center" variant="h4" component="div" m={5}>
         Music Albums from IVE
       </Typography>
-      <Grid container spacing={3}>
-        {albums.map((album, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card>
-              <CardHeader title={album.title}/>
-              <CardContent>
-              <CardMedia
-                component="img"
-                image={album.cover_big} // URL of the image
-                alt={album.title} // Alt text for accessibility
-              />
-              </CardContent>
-              <CardActions>
-                <Button size="small"  onClick={() => handleOpen(album)}>Show Tracklist</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
+      <Grid container spacing={10}>
+        {/* AlbumGrid component */}
+        <Grid item xs={12} md={8}>
+          <AlbumGrid albums={albums} />
+        </Grid>
+        {/* SongsGrid component */}
+        <Grid item xs={12} md={4}>
+          <Container>
+            <SongsGrid />
+          </Container>
+        </Grid>
       </Grid>
-      {/* Conditionally render the ModalComponent */}
-      {selectedAlbum && (
-        <SongsModalComponent open={open} handleClose={handleClose} data={selectedAlbum} />
-      )}
     </Container>
   );
 };

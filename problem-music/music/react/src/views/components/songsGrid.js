@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
+//songsGrid.js
+import React, { useState, useEffect} from 'react';
 import { Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import { useLikedSongs } from './likedSongsContext'; // Import useLikedSongs hook
+
 
 const SongsGrid = () => {
-  const [tracklist, setTracklist] = useState([]);
+  const { likedSongs } = useLikedSongs(); // Access likedSongs from context
+
+  const [tracklist, setTracklist] = useState(likedSongs);
 
   useEffect(() => {
     const storedElements = JSON.parse(localStorage.getItem('myLikedSongs')) || [];

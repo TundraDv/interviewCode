@@ -1,6 +1,8 @@
+// albumsGrid.js
 import React, { useState } from 'react';
-import SongsModalComponent from '../components/modal';
-import { Container, Grid, Typography, Button } from '@mui/material';
+import SongsModalComponent from './modal';
+import { Typography, Button } from '@mui/material';
+import { LikedSongsProvider } from './likedSongsContext';
 import { DataGrid } from '@mui/x-data-grid';
 
 const AlbumGrid = ({ albums }) => {
@@ -47,7 +49,9 @@ const AlbumGrid = ({ albums }) => {
         <div>
           <Button size="small" onClick={() => handleOpen(params.row)}>Show Tracklist</Button>
           {selectedAlbum && selectedAlbum.id === params.row.id && (
-            <SongsModalComponent open={open} handleClose={handleClose} data={selectedAlbum} />
+            <LikedSongsProvider>
+              <SongsModalComponent open={open} handleClose={handleClose} data={selectedAlbum} />
+            </LikedSongsProvider>
           )}
         </div>
       ),

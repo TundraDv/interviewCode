@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SongsModalComponent from '../components/modal';
-import { Container, Grid, Typography, Button } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import AlbumGrid from '../components/albumsGrid';
-import SongsGrid from '../components/songsGrid';
+import { Container, Grid, Typography} from '@mui/material';
+import AlbumGrid from './components/albumsGrid';
+import SongsGrid from './components/songsGrid';
+import { LikedSongsProvider } from './components/likedSongsContext'; // Import LikedSongsProvider
+
 import axios from 'axios';
 
 const AlbumsView = () => {
@@ -37,7 +37,9 @@ const AlbumsView = () => {
         {/* SongsGrid component */}
         <Grid item xs={12} md={4}>
           <Container>
-            <SongsGrid />
+            <LikedSongsProvider>
+              <SongsGrid />
+            </LikedSongsProvider>
           </Container>
         </Grid>
       </Grid>
